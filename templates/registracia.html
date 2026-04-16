@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <title>Registrácia nového zamestnanca</title>
+    <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    label  { font-size: 40px; }
+    button { height: 40px; font-size: 25px; }
+    input  { height: 40px; font-size: 25px; }
+    </style>
+  </head>
+  <body>
+    <button type="button" style="position: absolute; top: 10px; right: 10px;" onclick="window.location.href='{{ url_for('index') }}';">Domov</button>
+    <form method="POST">
+      <label for="meno">Meno:</label>
+      <input type="text" name="meno" id="meno" placeholder="Meno" required><br>
+      <input type="submit" value="Odoslať"><br>
+    </form>
+  </body>
+</html>

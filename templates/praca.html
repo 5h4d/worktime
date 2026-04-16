@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='sk'>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width-device-width">
+    <title>Zápis pracovnej doby</title>
+    <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        font-size: 40px;
+      }
+      button { height: 40px; font-size: 25px;}
+      select { height: 40px; font-size: 25px;}
+      input  { height: 40px; font-size: 25px;}
+    </style>
+  </head>
+  <body>
+    <button type="button" style="position: absolute; top: 10px; right: 10px;" onclick="window.location.href='{{ url_for('index') }}';">Domov</button>
+    <form method="POST">
+      <label>Meno:</label>
+      <select id="meno" name="meno" required>
+        <option value="" selected disabled>---</option>
+        {%for meno in nahmen%}
+        <option value={{meno[0]}} {% if data and meno[0] == data[0] %} selected {% endif %}>{{meno[1]}}</option>
+        {%endfor%}
+      </select><br/>
+      <label>Dátum:</label>
+      <input type="date" name="datum" id="datum" {% if data %} value={{data[1]}} {%endif%} placeholder="Zadajte dátum" required>
+      <button type="button" onclick="populate('datum', today())">Dnes</button><br/>
+      <label>Pŕichod:</label>
+      <input type="time" name="prichod" id="prichod" {% if data %} value={{data[2]}} {%endif%} placeholder="Zadajte čas príchodu" required>
+      <button type="button" onclick="populate('prichod', rn())">Teraz</button><br/>
+      <label>Odchod:</label>
+      <input type="time" name="odchod" id="odchod" {% if data %} value={{data[3]}} {%endif%} placeholder="Zadajte čas odchodu">
+      <button type="button" onclick="populate('odchod', rn())">Teraz</button><br/>
+      {%if id%} <input type="hidden" id="id" name="id" value="{{id}}"> {%endif%}
+      {%if start%}
+      <input type="hidden" name="start" id="start" value="{{start}}">
+      <input type="hidden" name="end" id="end" value="{{end}}">
+      {%endif%}
+      <input type="submit" value="Uložiť"><br/>
+    </form>
+  </body>
+</html>

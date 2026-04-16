@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Úplne že brutálna aplikácia</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      .btn {
+        width: 40%;
+        height: 10%;
+        font-size: 20px;
+      }
+      footer {
+        font-size: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="{{ url_for('static', filename='ctib.jpg') }}" alt="ctib" style="width: 15%; justify-self: left;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
+      <button type="button" class="btn" onclick="window.location.href='{{ url_for('praca') }}';">Zaznamenanie práce</button><br/>
+      <button type="button" class="btn" onclick="window.location.href='{{ url_for('robici') }}';">Výpis pracovnej doby</button><br/>
+      <button type="button" class="btn" onclick="window.location.href='{{ url_for('registracia') }}';">Registrácia nového zamestnanca</button><br>
+    </div>
+    <footer>
+      <p>čau Majka</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Odrobene</title>
+  <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
+</head>
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+
+<body>
+  <form>
+    <label for="start">Začiatok:</label>
+    <input type="date" id="start" name="start" value="{{ start }}">
+    <label for="end">Koniec:</label>
+    <input type="date" id="end" name="end" value="{{ end }}">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const startInput = document.getElementById('start');
+        const endInput = document.getElementById('end');
+
+        function submitForm(){
+          const start = startInput.value;
+          const end = endInput.value;
+
+          if (start && end) {
+            window.location.href = `/list?start=${start}&end=${end}`;
+          }
+        }
+          startInput.addEventListener('change', submitForm);
+          endInput.addEventListener('change', submitForm);
+      });
+    </script>
+  </form> 
+    <button type="button" style="position: absolute; top: 10px; right: 10px;" onclick="window.location.href='{{ url_for('index') }}';">Domov</button>
+  <br>
+  <table style="width: 100%">
+    <tr>
+      <th>Meno</th>
+      <th>Odrobené dokopy</th>
+      <th>Soboty</th>
+      <th>Nedele</th>
+    </tr>
+    {%for robič in data%}
+    <tr>
+      <td>{{robič[0]}}</td>
+      <td>{{robič[1]}}</td>
+      <td>{{robič[2]}}</td>
+      <td>{{robič[3]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+  <br><hr><br>
+  <table style="width: 100%;">
+      <tr>
+        <th>id</th>
+        <th>Meno</th>
+        <th>Dátum</th>
+        <th>Príchod</th>
+        <th>Odchod</th>
+        <th></th><th></th>
+      </tr>
+      {%for robota in zrobene%}
+      <tr>
+        <td>{{robota[0]}}</td>
+        <td>{{robota[1]}}</td>
+        <td>{{robota[2]}}</td>
+        <td>{{robota[3]}}</td>
+        <td>{{robota[4]}}</td>
+        <td><a href="{{ url_for('praca', id=robota[0], start=start, end=end) }}">Upraviť</a></td>
+        <td><a href="{{ url_for('robici', rmid=robota[0], start=start, end=end) }}">Odstrániť</a></td>
+      </tr>
+      {%endfor%}
+  </table>
+</body>
+<!-- import tkinter -->
+<!--   def kocinka -->
+<!--   if koccii -->
+
+</html>
